@@ -15,4 +15,8 @@ myApp.controller('MeetingsController',
     });
   } //addmeeting
 
+  $scope.deleteMeeting=function(key) {
+    meetings.$remove(key);
+  } //deletemeeting
+
 }); //MeetingsController
