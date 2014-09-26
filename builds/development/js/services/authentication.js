@@ -5,12 +5,19 @@ myApp.factory('Authentication', function($firebase,
   var simpleLogin = $firebaseSimpleLogin(ref);
 
   var myObject = {
+
     login : function(user) {
       return simpleLogin.$login('password', {
         email: user.email,
         password: user.password
       });
-    } //login
+    }, //login
+
+    logout : function() {
+      return simpleLogin.$logout();
+    } //logout
+
+
   } //myObject
 
   return myObject;
