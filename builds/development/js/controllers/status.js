@@ -3,7 +3,7 @@ myApp.controller('StatusController', function(
     $location, Authentication) {
 
   $scope.logout = function() {
-    Authentication.logout;
+    Authentication.logout();
     $location.path('/login');
   } //logout
 
