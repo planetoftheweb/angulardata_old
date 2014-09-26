@@ -1,13 +1,8 @@
 myApp.controller('RegistrationController', 
-  function($scope, $firebaseSimpleLogin, $location) {
-
-  var ref = new Firebase('https://attendanceldcapp.firebaseio.com/');
-  var simpleLogin = $firebaseSimpleLogin(ref);
+  function($scope, $firebaseSimpleLogin, $location, Authentication) {
   
   $scope.login = function() {
-    simpleLogin.$login('password', {
-      email: $scope.user.email,
-      password: $scope.user.password
+      Authentication.login($scope.user);
     }).then(function(user) {
       $location.path('/meetings');
     }, function(error) {
