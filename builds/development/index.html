@@ -27,8 +27,8 @@
 </header>
 <div class="page">
   <div class="userinfo" 
-    ng-controller="StatusController" ng-show="userEmail">
-    <span class="user">Hi {{ userEmail }}</span>
+    ng-controller="StatusController" ng-show="currentUser">
+    <span class="user">Hi {{ currentUser.firstname }}</span>
     <a href="#" ng-click="logout()">logout</a>
   </div>
   <main class="cf" ng-view></main>
