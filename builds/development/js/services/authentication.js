@@ -14,7 +14,21 @@ myApp.factory('Authentication', function($firebase,
     }, //login
 
     register : function(user) {
-      return simpleLogin.$createUser(user.email, user.password);
+      return simpleLogin.$createUser(user.email, user.password)
+      .then(function(regUser){
+        var ref = new Firebase(FIREBASE_URL + 'users');
+        var firebaseUsers = $firebase(ref);
+
+        var userInfo = {
+          date: Firebase.ServerValue.TIMESTAMP,
+          regUser: regUser.uid,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          email: user.email
+        }
+
+        firebaseUsers.$set(regUser.uid, userInfo);
+      }); //add user
     }, //register
 
     logout : function() {
