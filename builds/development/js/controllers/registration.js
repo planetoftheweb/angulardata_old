@@ -20,9 +20,4 @@ myApp.controller('RegistrationController',
     });
   } //login
 
-
-  $scope.register = function() {
-    $location.path('/meetings');
-  } //login
-
 }); //RegistrationController
