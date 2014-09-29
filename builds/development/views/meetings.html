@@ -7,7 +7,7 @@
       or <a ng-href="#/login">Login</a></p>
   </div>
 
-  <div class="displaymeetings">
+  <div ng-show="signedIn()" class="displaymeetings">
     <h1>Add Meetings</h1>
     <form class="formgroup addmeeting cf"
       name="myform"
