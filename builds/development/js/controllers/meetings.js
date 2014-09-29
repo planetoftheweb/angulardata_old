@@ -1,34 +1,37 @@
 myApp.controller('MeetingsController', 
-  function($scope, $rootScope, $firebase) {
+  function($scope, $rootScope, $firebase, FIREBASE_URL) {
 
-  var ref = new Firebase('https://attendanceldcapp.firebaseio.com/meetings');
-  var meetingsInfo = $firebase(ref);
-  var meetingsObj = $firebase(ref).$asObject();
-  var meetingsArray = $firebase(ref).$asArray();
+  $rootScope.$on('$firebaseSimpleLogin:login', function(e, authUser) {
 
-  meetingsObj.$loaded().then(function(data) {
-    $scope.meetings = meetingsObj;
-  }); // meetings Object Loaded
+    var ref = new Firebase(FIREBASE_URL + 'users/' + authUser.uid + '/meetings');
+    var meetingsInfo = $firebase(ref);
+    var meetingsObj = $firebase(ref).$asObject();
+    var meetingsArray = $firebase(ref).$asArray();
 
-  meetingsArray.$loaded().then(function(data) {
-    $rootScope.howManyMeetings = meetingsArray.length;
-  }); // meetings Array Loaded
+    meetingsObj.$loaded().then(function(data) {
+      $scope.meetings = meetingsObj;
+    }); // meetings Object Loaded
 
-  meetingsArray.$watch(function(event) {
-    $rootScope.howManyMeetings = meetingsArray.length;
-  });
+    meetingsArray.$loaded().then(function(data) {
+      $rootScope.howManyMeetings = meetingsArray.length;
+    }); // meetings Array Loaded
 
-  $scope.addMeeting=function() {
-    meetingsInfo.$push({
-      name: $scope.meetingname,
-      date: Firebase.ServerValue.TIMESTAMP
-    }).then(function() {
-      $scope.meetingname = '';
+    meetingsArray.$watch(function(event) {
+      $rootScope.howManyMeetings = meetingsArray.length;
     });
-  } //addmeeting
 
-  $scope.deleteMeeting=function(key) {
-    meetingsInfo.$remove(key);
-  } //deletemeeting
+    $scope.addMeeting=function() {
+      meetingsInfo.$push({
+        name: $scope.meetingname,
+        date: Firebase.ServerValue.TIMESTAMP
+      }).then(function() {
+        $scope.meetingname = '';
+      });
+    } //addmeeting
 
+    $scope.deleteMeeting=function(key) {
+      meetingsInfo.$remove(key);
+    } //deletemeeting
+
+  }); //user is logged in
 }); //MeetingsController

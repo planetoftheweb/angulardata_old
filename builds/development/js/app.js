@@ -19,6 +19,6 @@ myApp.config(['$routeProvider', function($routeProvider) {
       controller:  'MeetingsController'
     }).
     otherwise({
-      redirectTo: '/login'
+      redirectTo: '/meetings'
     });
 }]);

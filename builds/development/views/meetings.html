@@ -22,7 +22,7 @@
         ng-disabled="myform.$invalid">+</button>
     </form>
 
-    <h2>Your Meetings</h2>
+    <h2 ng-if="howManyMeetings>0">Your Meetings</h2>
     <div class="meeting" ng-repeat="(key, meeting) in meetings">
       <button class="btn btn-delete tooltip" ng-click="deleteMeeting(key)">
         <span>Delete this meeting</span></button>
