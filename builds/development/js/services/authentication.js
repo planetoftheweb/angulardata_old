@@ -7,6 +7,14 @@ myApp.factory('Authentication', function($firebase,
   var myObject = {
 
     login : function(user) {
+
+      var userRef = new Firebase(FIREBASE_URL + '/users/' + user.uid);
+      var userObj = $firebase(userRef).$asObject();
+
+      userObj.$loaded().then(function() {
+        $rootScope.currentUser = userObj;
+      });
+
       return simpleLogin.$login('password', {
         email: user.email,
         password: user.password
@@ -35,8 +43,17 @@ myApp.factory('Authentication', function($firebase,
       return simpleLogin.$logout();
     } //logout
 
+    signedIn: function() {
+      return simpleLogin.user != null;
+    }
 
   } //myObject
+
+  //add the function to the rootScope
+
+  $rootScope.signedIn = function() {
+    return myObject.signedIn();
+  }
 
   return myObject;
 });
