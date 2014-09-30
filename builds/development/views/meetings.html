@@ -25,6 +25,10 @@
     <h2 ng-if="howManyMeetings>0">Your Meetings</h2>
     <div class="meeting" ng-repeat="(key, meeting) in meetings">
 
+      <a class="btn btn-list tooltip" 
+        ng-href="#/checkins/{{currentUser.regUser}}/{{key}}/checkinsList">
+        <span>View list of checked in users</span></a>
+
       <a class="btn btn-checkin tooltip" 
         ng-href="#/checkins/{{currentUser.regUser}}/{{key}}">
         <span>Go to check-in URL</span></a>

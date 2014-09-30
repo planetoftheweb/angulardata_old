@@ -25,4 +25,9 @@ myApp.controller('CheckInsController', function(
     }); //data sent to firebase.
   } //addCheckin
 
+  $scope.deleteCheckin = function(id) {
+    var record = $firebase(ref);
+    record.$remove(id);
+  } //delete Checkin
+
 }); //CheckInsController
