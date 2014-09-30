@@ -24,8 +24,14 @@
 
     <h2 ng-if="howManyMeetings>0">Your Meetings</h2>
     <div class="meeting" ng-repeat="(key, meeting) in meetings">
+
+      <a class="btn btn-checkin tooltip" 
+        ng-href="#/checkins/{{currentUser.regUser}}/{{key}}">
+        <span>Go to check-in URL</span></a>
+
       <button class="btn btn-delete tooltip" ng-click="deleteMeeting(key)">
         <span>Delete this meeting</span></button>
+
       <span class="text">{{meeting.name}}</span>
     </div><!-- Meetings List -->
   </div><!-- Display Meetings -->
