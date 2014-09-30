@@ -5,10 +5,32 @@
   <div class="search cf">
     <h2>Search Check-ins</h2>
     <input type="text" ng-model="query" placeholder="Search for users">
+
+    <div class="formgroup cf">
+      <span class="label">by:</span>
+      <select ng-model="order">
+        <option value="firstname">First Name</option>
+        <option value="lastname">Last Name</option>
+        <option value="date">Date</option>
+      </select>
+    </div><!-- Search by -->
+
+    <div class="formgroup cf">
+
+      <input id="dirascending" type="radio"
+        ng-model="direction" name="direction" value="">
+      <label for="dirascending">asc</label>
+
+      <input id="dirdescending" type="radio"
+        ng-model="direction" name="direction" value="reverse">
+      <label for="dirdescending">desc</label>
+
+    </div>
+
   </div>
 
   <ul class="userlist cf">
-    <li ng-repeat="checkin in checkins | filter: query">
+    <li ng-repeat="checkin in checkins | orderBy:order:direction | filter: query">
       <div class="checkin">
         <div class="buttons">
 
