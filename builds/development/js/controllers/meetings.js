@@ -1,9 +1,14 @@
 myApp.controller('MeetingsController', 
-  function($scope, $rootScope, $firebase, FIREBASE_URL) {
+  function($scope, $rootScope, 
+    $firebase, $firebaseSimpleLogin, FIREBASE_URL) {
 
-  $rootScope.$on('$firebaseSimpleLogin:login', function(e, authUser) {
+var ref = new Firebase(FIREBASE_URL);
+var simpleLogin = $firebaseSimpleLogin(ref);
 
-    var ref = new Firebase(FIREBASE_URL + 'users/' + authUser.uid + '/meetings');
+  simpleLogin.$getCurrentUser().then(function(authUser) {
+
+    var ref = new Firebase(FIREBASE_URL + '/users/' 
+        + authUser.uid + '/meetings');
     var meetingsInfo = $firebase(ref);
     var meetingsObj = $firebase(ref).$asObject();
     var meetingsArray = $firebase(ref).$asArray();
@@ -33,5 +38,7 @@ myApp.controller('MeetingsController',
       meetingsInfo.$remove(key);
     } //deletemeeting
 
-  }); //user is logged in
+
+  }); //get current user
+
 }); //MeetingsController
