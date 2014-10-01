@@ -67,6 +67,19 @@
             <button type="submit" class="btn"
               ng-disabled="myform.$invalid">+</button>
           </form>
+
+          <ul class="awardslist cf">
+            <li class="cf" ng-repeat="(key, award) in checkin.awards">
+              <div class="award">{{award.name}}
+                <div class="buttons" ng-show="signedIn()">
+                  <button class="btn btn-delete tooltip" 
+                    ng-click="deleteLove(checkin.$id, key)">
+                    <span>Delete this award</span></button>
+                </div><!-- buttons -->
+
+              </div>
+            </li>
+          </ul>
         </div><!-- showcheckins -->
 
       </div><!-- checkin -->
