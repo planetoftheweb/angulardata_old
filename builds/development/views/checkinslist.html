@@ -35,9 +35,15 @@
   </div><!-- search box -->
 
   <ul class="userlist cf">
-    <li ng-repeat="checkin in checkins |
+    <li ng-class="checkin.userState" ng-repeat="checkin in checkins |
       orderBy:order:direction | filter: { $id: recordId, $: query}">
       <div class="checkin">
+
+        <div class="buttons" ng-show="signedIn()">
+          <button class="btn btn-love tooltip" 
+            ng-click="showLove(checkin)">
+            <span>Show the love</span></button>
+        </div><!-- buttons -->
 
         <div class="buttons" ng-show="signedIn()">
           <button class="btn btn-delete tooltip" 
@@ -49,6 +55,17 @@
           <h2>{{checkin.firstname}} {{checkin.lastname}}</h2>
           <div class="date">{{checkin.date | date:"MMM d, yy h:mm a"}}</div>
         </div><!-- info -->
+
+        <div class="showcheckins" ng-show="checkin.show">
+          <form class="cf"
+            ng-submit="giveLove(checkin, checkin.giftText)"
+            novalidate>
+            <input type="text" name="giftText"
+              ng-required="true">
+            <button type="submit" class="btn"
+              ng-disabled="myform.$invalid">+</button>
+          </form>
+        </div><!-- showcheckins -->
 
       </div><!-- checkin -->
     </li>

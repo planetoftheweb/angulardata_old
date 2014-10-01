@@ -37,4 +37,15 @@ myApp.controller('CheckInsController', function(
     $scope.recordId = checkinsList.$keyAt(whichRecord);
   } //pick random
 
+  $scope.showLove = function(myItem) {
+    myItem.show = !myItem.show;
+
+    if(myItem.userState == 'expanded') {
+      myItem.userState = '';
+    } else {
+      myItem.userState = 'expanded';
+    }
+  } //showLove
+
+
 }); //CheckInsController
