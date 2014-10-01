@@ -33,7 +33,9 @@
         ng-href="#/checkins/{{currentUser.regUser}}/{{key}}">
         <span>Go to check-in URL</span></a>
 
-      <button class="btn btn-delete tooltip" ng-click="deleteMeeting(key)">
+      <button class="btn btn-delete tooltip" 
+        confirmation-needed="Sure you want to delete the Meeting?"
+        ng-click="deleteMeeting(key)">
         <span>Delete this meeting</span></button>
 
       <span class="text">{{meeting.name}}</span>

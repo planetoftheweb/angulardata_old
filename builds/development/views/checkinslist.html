@@ -46,9 +46,10 @@
         </div><!-- buttons -->
 
         <div class="buttons" ng-show="signedIn()">
-          <button class="btn btn-delete tooltip" 
+          <button class="btn btn-delete tooltip"
+            confirmation-needed="Sure you want to delete the Checkin?"           
             ng-click="deleteCheckin(checkin.$id)">
-            <span>Delete this meeting</span></button>
+            <span>Delete this check-in</span></button>
         </div><!-- buttons -->
 
         <div class="info">
@@ -72,7 +73,7 @@
             <li class="cf" ng-repeat="(key, award) in checkin.awards">
               <div class="award">{{award.name}}
                 <div class="buttons" ng-show="signedIn()">
-                  <button class="btn btn-delete tooltip" 
+                  <button class="btn btn-delete tooltip" confirmation-needed="Sure you want to delete the award?"
                     ng-click="deleteLove(checkin.$id, key)">
                     <span>Delete this award</span></button>
                 </div><!-- buttons -->
