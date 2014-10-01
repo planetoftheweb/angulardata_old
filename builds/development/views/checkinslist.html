@@ -61,7 +61,9 @@
             ng-submit="giveLove(checkin, checkin.giftText)"
             novalidate>
             <input type="text" name="giftText"
-              ng-required="true">
+              ng-required="true"
+              placeholder="What are you giving them?"
+              ng-model="checkin.giftText">
             <button type="submit" class="btn"
               ng-disabled="myform.$invalid">+</button>
           </form>
