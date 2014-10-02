@@ -6,9 +6,9 @@ myApp.directive('confirmationNeeded', function() {
       var msg = attr.confirmationNeeded || "Are you sure you want to delete?";
       var clickAction = attr.ngClick;
       element.bind('click', function() {
-        if (window.confirm(msg) {
+        if (window.confirm(msg)) {
           scope.$eval(clickAction);
-        })// confirm
+        } // confirm
       }); //click
     } // link
   } //return
