@@ -1,6 +1,6 @@
 myApp.controller('CheckInsController', function(
   $scope, $rootScope, $firebase, $routeParams,
-  $firebaseSimpleLogin, $location, FIREBASE_URL) {
+  $location, FIREBASE_URL) {
 
   $scope.whichmeeting = $routeParams.mId;
   $scope.whichuser = $routeParams.uId;

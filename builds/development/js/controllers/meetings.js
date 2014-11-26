@@ -1,11 +1,11 @@
 myApp.controller('MeetingsController', 
   function($scope, $rootScope, 
-    $firebase, $firebaseSimpleLogin, FIREBASE_URL) {
+    $firebase, $firebaseAuth, FIREBASE_URL) {
 
 var ref = new Firebase(FIREBASE_URL);
-var simpleLogin = $firebaseSimpleLogin(ref);
+var auth = $firebaseAuth(ref);
 
-  simpleLogin.$getCurrentUser().then(function(authUser) {
+  auth.$getAuth(function(authUser) {
 
     if (authUser !== null) {
       var ref = new Firebase(FIREBASE_URL + '/users/' 

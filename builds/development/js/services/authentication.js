@@ -1,8 +1,8 @@
 myApp.factory('Authentication', function($firebase, 
-  $firebaseSimpleLogin, FIREBASE_URL, $rootScope, $location) {
+  $firebaseAuth, FIREBASE_URL, $rootScope, $location) {
 
   var ref = new Firebase(FIREBASE_URL);
-  var simpleLogin = $firebaseSimpleLogin(ref);
+  var auth = $firebaseAuth(ref);
 
   var myObject = {
 
@@ -15,14 +15,14 @@ myApp.factory('Authentication', function($firebase,
         $rootScope.currentUser = userObj;
       });
 
-      return simpleLogin.$login('password', {
+      return auth.$authWithPassword({
         email: user.email,
         password: user.password
       });
     }, //login
 
     register : function(user) {
-      return simpleLogin.$createUser(user.email, user.password)
+      return auth.$createUser(user.email, user.password)
       .then(function(regUser){
         var ref = new Firebase(FIREBASE_URL + 'users');
         var firebaseUsers = $firebase(ref);
@@ -40,11 +40,11 @@ myApp.factory('Authentication', function($firebase,
     }, //register
 
     logout : function() {
-      return simpleLogin.$logout();
+      return auth.$unauth();
     }, //logout
 
     signedIn: function() {
-      return simpleLogin.user != null;
+      return auth.user != null;
     }
 
   } //myObject

@@ -10,9 +10,8 @@
   <script src="js/lib/angular/angular-route.min.js"></script>
   <script src="js/lib/angular/angular-animate.min.js"></script>
 
-  <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
-  <script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
-  <script src="https://cdn.firebase.com/js/simple-login/1.6.2/firebase-simple-login.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
 
   <script src="js/app.js"></script>
   <script src="js/services/authentication.js"></script>
@@ -23,10 +22,10 @@
   <script src="js/directives/confirm.js"></script>
 </head>
 <body>
-<header>
-  <nav class="cf" ng-include="'views/nav.html'"
-    ng-controller="StatusController"></nav>
-</header>
+    <header>
+      <nav class="cf" ng-include="'views/nav.html'"
+        ng-controller="StatusController"></nav>
+    </header>
 <div class="page">
   <div class="userinfo" 
     ng-controller="StatusController" ng-show="currentUser">
