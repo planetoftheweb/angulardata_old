@@ -1,6 +1,7 @@
-var myApp = angular.module('myApp', 
+var myApp = angular.module('myApp',
   ['ngRoute', 'firebase', 'appControllers'])
-.constant('FIREBASE_URL', 'https://attendanceldcapp.firebaseio.com/');
+//Placeholder: https://attendanceldcapp.firebaseio.com/
+.constant('FIREBASE_URL', 'https://meetingattnd.firebaseio.com/');
 
 var appControllers = angular.module('appControllers', ['firebase']);
 
@@ -27,6 +28,6 @@ myApp.config(['$routeProvider', function($routeProvider) {
       controller:  'CheckInsController'
     }).
     otherwise({
-      redirectTo: '/meetings'
+      redirectTo: '/login'
     });
 }]);

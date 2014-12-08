@@ -1,14 +1,15 @@
-myApp.controller('MeetingsController', 
-  function($scope, $rootScope, 
+myApp.controller('MeetingsController',
+  function($scope, $rootScope,
     $firebase, $firebaseAuth, FIREBASE_URL) {
 
-var ref = new Firebase(FIREBASE_URL);
-var auth = $firebaseAuth(ref);
+    var ref = new Firebase(FIREBASE_URL);
+    var auth = $firebaseAuth(ref);
 
-  auth.$getAuth(function(authUser) {
+    //$getAuth takes no params
+    var authUser = auth.$getAuth();
 
     if (authUser !== null) {
-      var ref = new Firebase(FIREBASE_URL + '/users/' 
+      var ref = new Firebase(FIREBASE_URL + '/users/'
           + authUser.uid + '/meetings');
       var meetingsInfo = $firebase(ref);
       var meetingsObj = $firebase(ref).$asObject();
@@ -40,7 +41,5 @@ var auth = $firebaseAuth(ref);
       } //deletemeeting
 
     } // user exists
-
-  }); //get current user
 
 }); //MeetingsController

@@ -1,28 +1,28 @@
-myApp.factory('Authentication', function($firebase, 
+myApp.factory('Authentication', function($firebase,
   $firebaseAuth, FIREBASE_URL, $rootScope, $location) {
 
   var ref = new Firebase(FIREBASE_URL);
-  var auth = $firebaseAuth(ref);
+  $rootScope.auth = $firebaseAuth(ref);
 
   var myObject = {
 
     login : function(user) {
 
-      var userRef = new Firebase(FIREBASE_URL + '/users/' + user.uid);
+      var userRef = new Firebase(FIREBASE_URL + 'users/' + user.uid);
       var userObj = $firebase(userRef).$asObject();
 
       userObj.$loaded().then(function() {
         $rootScope.currentUser = userObj;
       });
 
-      return auth.$authWithPassword({
+      return $rootScope.auth.$authWithPassword({
         email: user.email,
         password: user.password
       });
     }, //login
 
     register : function(user) {
-      return auth.$createUser(user.email, user.password)
+      return $rootScope.auth.$createUser(user.email, user.password)
       .then(function(regUser){
         var ref = new Firebase(FIREBASE_URL + 'users');
         var firebaseUsers = $firebase(ref);
@@ -40,16 +40,14 @@ myApp.factory('Authentication', function($firebase,
     }, //register
 
     logout : function() {
-      return auth.$unauth();
+      return $rootScope.auth.$unauth();
     }, //logout
 
     signedIn: function() {
-      return auth.user != null;
+      return $rootScope.auth.$getAuth() != null;
     }
 
   } //myObject
-
-  //add the function to the rootScope
 
   $rootScope.signedIn = function() {
     return myObject.signedIn();
