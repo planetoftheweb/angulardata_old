@@ -1,7 +1,7 @@
 var myApp = angular.module('myApp',
   ['ngRoute', 'firebase', 'appControllers'])
 //Placeholder: https://attendanceldcapp.firebaseio.com/
-.constant('FIREBASE_URL', 'https://meetingattnd.firebaseio.com/');
+.constant('FIREBASE_URL', 'https://attendanceldcapp.firebaseio.com/');
 
 var appControllers = angular.module('appControllers', ['firebase']);
 
