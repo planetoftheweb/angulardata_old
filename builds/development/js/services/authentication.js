@@ -1,4 +1,4 @@
-myApp.factory('Authentication', function($firebase, 
+myApp.factory('Authentication', function($firebase,
   $firebaseAuth, FIREBASE_URL, $rootScope, $location) {
 
   var ref = new Firebase(FIREBASE_URL);
@@ -6,14 +6,23 @@ myApp.factory('Authentication', function($firebase,
 
   var myObject = {
 
-    login : function(user) {
+    login: function(user) {
 
-      var userRef = new Firebase(FIREBASE_URL + '/users/' + user.uid);
-      var userObj = $firebase(userRef).$asObject();
+      var ref = new Firebase(FIREBASE_URL);
+      var auth = $firebaseAuth(ref);
 
-      userObj.$loaded().then(function() {
-        $rootScope.currentUser = userObj;
-      });
+      auth.$onAuth(function(authUser) {
+        if (authUser) {
+
+          var ref = new Firebase(FIREBASE_URL + '/users/' + authUser.uid);
+          var user = $firebase(ref).$asObject();
+
+          $rootScope.currentUser = user;
+
+        } else {
+          $rootScope.currentUser = null;
+        }
+      }); // Check user status 
 
       return auth.$authWithPassword({
         email: user.email,
@@ -21,39 +30,39 @@ myApp.factory('Authentication', function($firebase,
       });
     }, //login
 
-    register : function(user) {
+    register: function(user) {
       return auth.$createUser(user.email, user.password)
-      .then(function(regUser){
-        var ref = new Firebase(FIREBASE_URL + 'users');
-        var firebaseUsers = $firebase(ref);
+        .then(function(regUser) {
+          var ref = new Firebase(FIREBASE_URL + 'users');
+          var firebaseUsers = $firebase(ref);
 
-        var userInfo = {
-          date: Firebase.ServerValue.TIMESTAMP,
-          regUser: regUser.uid,
-          firstname: user.firstname,
-          lastname: user.lastname,
-          email: user.email
-        }
+          var userInfo = {
+            date: Firebase.ServerValue.TIMESTAMP,
+            regUser: regUser.uid,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email
+          };
 
-        firebaseUsers.$set(regUser.uid, userInfo);
-      }); //add user
+          firebaseUsers.$set(regUser.uid, userInfo);
+        }); //add user
     }, //register
 
-    logout : function() {
+    logout: function() {
       return auth.$unauth();
     }, //logout
 
     signedIn: function() {
-      return auth.user != null;
+      return auth.user !== null;
     }
 
-  } //myObject
+  }; //myObject
 
   //add the function to the rootScope
 
   $rootScope.signedIn = function() {
     return myObject.signedIn();
-  }
+  };
 
   return myObject;
 });
