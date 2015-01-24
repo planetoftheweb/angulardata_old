@@ -49,6 +49,13 @@ myApp.factory('Authentication', function($firebase,
     }, //register
 
     logout: function() {
+      auth.$onAuth(function(authUser) {
+        if (authUser) {
+        } else {
+          $location.path('/login');
+        }
+      }); // Check user status 
+
       return auth.$unauth();
     }, //logout
 

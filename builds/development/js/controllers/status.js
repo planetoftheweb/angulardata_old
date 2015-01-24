@@ -1,11 +1,11 @@
 myApp.controller('StatusController', function(
   $scope, $rootScope,
-  $location, $firebase, $firebaseAuth, FIREBASE_URL) {
+  $location, $firebase, $firebaseAuth, Authentication, FIREBASE_URL) {
 
   var ref = new Firebase(FIREBASE_URL);
   var auth = $firebaseAuth(ref);
 
-  auth.$onAuth(function(authUser) {
+  auth.$getAuth(function(authUser) {
     if (authUser) {
 
       var ref = new Firebase(FIREBASE_URL + '/users/' + authUser.uid);
@@ -17,6 +17,10 @@ myApp.controller('StatusController', function(
       $rootScope.currentUser = null;
     }
   }); // Check user status 
+
+  $scope.logout = function() {
+    Authentication.logout();
+  }; //logout
 
 }); //StatusController
 
