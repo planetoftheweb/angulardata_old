@@ -6,6 +6,8 @@ myApp.controller('CheckInsController', function(
   $scope.whichuser = $routeParams.uId;
   $scope.order = "firstname";
   $scope.direction = "";
+  $scope.recordId = '';
+  $scope.query = '';
 
   var ref = new Firebase(FIREBASE_URL + '/users/' + $scope.whichuser + '/meetings/' + $scope.whichmeeting + '/checkins');
   var checkinsList = $firebase(ref).$asArray();
