@@ -25,7 +25,7 @@
       <label for="dirdescending">desc</label>
     </div><!-- formgroup -->
 
-    <div class="buttons cf" ng-show="signedIn()">
+    <div class="buttons cf" ng-show="currentUser">
       <button ng-hide = "recordId" class="btn btn-pick"
         ng-click="pickRandom()">Pick Random</button>
       <button ng-show = "recordId" class="btn btn-reset"
@@ -39,13 +39,13 @@
       orderBy:order:direction | filter: { $id: recordId, $: query}">
       <div class="checkin">
 
-        <div class="buttons" ng-show="signedIn()">
+        <div class="buttons" ng-show="currentUser">
           <button class="btn btn-love tooltip" 
             ng-click="showLove(checkin)">
             <span>Show the love</span></button>
         </div><!-- buttons -->
 
-        <div class="buttons" ng-show="signedIn()">
+        <div class="buttons" ng-show="currentUser">
           <button class="btn btn-delete tooltip"
             confirmation-needed="Sure you want to delete the Checkin?"           
             ng-click="deleteCheckin(checkin.$id)">
@@ -72,7 +72,7 @@
           <ul class="awardslist cf">
             <li class="cf" ng-repeat="(key, award) in checkin.awards">
               <div class="award">{{award.name}}
-                <div class="buttons" ng-show="signedIn()">
+                <div class="buttons" ng-show="currentUser">
                   <button class="btn btn-delete tooltip" confirmation-needed="Sure you want to delete the award?"
                     ng-click="deleteLove(checkin.$id, key)">
                     <span>Delete this award</span></button>

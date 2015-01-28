@@ -1,13 +1,13 @@
 <section class="meetings cf">
 
-  <div ng-hide="signedIn()" class="sorry">
+  <div ng-hide="currentUser" class="sorry">
     <h1>Sorry</h1>
     <p>Only registered users can create and manage meetings.</p>
     <p>Please <a ng-href="#/register">Register</a> 
       or <a ng-href="#/login">Login</a></p>
   </div>
 
-  <div ng-show="signedIn()" class="displaymeetings">
+  <div ng-show="currentUser" class="displaymeetings">
     <h1>Add Meetings</h1>
     <form class="formgroup addmeeting cf"
       name="myform"
