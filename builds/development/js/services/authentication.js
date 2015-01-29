@@ -27,7 +27,6 @@ myApp.factory('Authentication', function($firebase,
 
     } else {
       $rootScope.currentUser = null;
-      $location.path('/login');      
     }
   }); // Check user status 
 

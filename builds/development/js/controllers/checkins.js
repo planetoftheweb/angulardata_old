@@ -1,6 +1,6 @@
 myApp.controller('CheckInsController', function(
   $scope, $rootScope, $firebase, $routeParams,
-  $location, Authentication, FIREBASE_URL) {
+  $location, Authentication, Meetings, FIREBASE_URL) {
 
   if ($rootScope.currentUser !== null) {
     $scope.whichmeeting = $routeParams.mId;
@@ -9,6 +9,9 @@ myApp.controller('CheckInsController', function(
     $scope.direction = "";
     $scope.recordId = '';
     $scope.query = '';
+
+    Meetings.countMeetings(); //Use the Meetings service
+
 
     var ref = new Firebase(FIREBASE_URL + '/users/' + $scope.whichuser + '/meetings/' + $scope.whichmeeting + '/checkins');
     var checkinsList = $firebase(ref).$asArray();

@@ -1,6 +1,6 @@
 myApp.controller('MeetingsController',
   function($scope, $rootScope,$firebase,
-    Authentication, FIREBASE_URL) {
+    Authentication, Meetings, FIREBASE_URL) {
 
     if ($rootScope.currentUser !== null) {
 
@@ -8,19 +8,12 @@ myApp.controller('MeetingsController',
         $rootScope.currentUser.$id + '/meetings');
       var meetingsInfo = $firebase(ref);
       var meetingsObj = $firebase(ref).$asObject();
-      var meetingsArray = $firebase(ref).$asArray();
 
       meetingsObj.$loaded().then(function(data) {
         $scope.meetings = meetingsObj;
       }); // meetings Object Loaded
 
-      meetingsArray.$loaded().then(function(data) {
-        $rootScope.howManyMeetings = meetingsArray.length;
-      }); // meetings Array Loaded
-
-      meetingsArray.$watch(function(event) {
-        $rootScope.howManyMeetings = meetingsArray.length;
-      });
+      Meetings.countMeetings(); //Use the Meetings service
 
       $scope.addMeeting = function() {
         meetingsInfo.$push({
