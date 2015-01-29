@@ -1,8 +1,7 @@
 myApp.controller('CheckInsController', function(
   $scope, $rootScope, $firebase, $routeParams,
-  $location, Authentication, Meetings, FIREBASE_URL) {
+  $location, Authentication, FIREBASE_URL) {
 
-  if ($rootScope.currentUser !== null) {
     $scope.whichmeeting = $routeParams.mId;
     $scope.whichuser = $routeParams.uId;
     $scope.order = "firstname";
@@ -10,8 +9,9 @@ myApp.controller('CheckInsController', function(
     $scope.recordId = '';
     $scope.query = '';
 
-    Meetings.countMeetings(); //Use the Meetings service
-
+    if ($rootScope.currentUser !== null) {
+      Authentication.signedIn(); //Use the Meetings service
+    }
 
     var ref = new Firebase(FIREBASE_URL + '/users/' + $scope.whichuser + '/meetings/' + $scope.whichmeeting + '/checkins');
     var checkinsList = $firebase(ref).$asArray();
@@ -73,5 +73,4 @@ myApp.controller('CheckInsController', function(
       var record = $firebase(refLove);
       record.$remove(award);
     }; //deleteLove
-  } //$rootScope has currentUser
 }); //CheckInsController

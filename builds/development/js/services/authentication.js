@@ -4,18 +4,6 @@ myApp.factory('Authentication', function($firebase,
   var ref = new Firebase(FIREBASE_URL);
   var auth = $firebaseAuth(ref);
 
-  auth.$getAuth(function(authUser) {
-    if (authUser) {
-
-      var ref = new Firebase(FIREBASE_URL + '/users/' + authUser.uid);
-      var user = $firebase(ref).$asObject();
-
-      $rootScope.currentUser = user;
-
-    } else {
-      $rootScope.currentUser = null;
-    }
-  }); // Check user status 
 
   auth.$onAuth(function(authUser) {
     if (authUser) {
@@ -67,8 +55,23 @@ myApp.factory('Authentication', function($firebase,
     }, //logout
 
     signedIn: function() {
-      return auth.user !== null;
-    }
+
+      auth.$getAuth(function(authUser) {
+        if (authUser) {
+
+          var ref = new Firebase(FIREBASE_URL + '/users/' + authUser.uid);
+          var user = $firebase(ref).$asObject();
+
+          $rootScope.currentUser = user;
+
+        } else {
+          $rootScope.currentUser = null;
+          $location.path('/login');      
+        }
+      }); // Check user status 
+
+
+    } //signedIn
 
   }; //myObject
 
