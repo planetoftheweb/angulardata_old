@@ -3,13 +3,14 @@ myApp.controller('CheckInsController', function(
   $location, Authentication, FIREBASE_URL) {
 
     $scope.whichmeeting = $routeParams.mId;
+    $rootScope.whichmeeting = $routeParams.mId;
     $scope.whichuser = $routeParams.uId;
     $scope.order = "firstname";
     $scope.direction = "";
     $scope.recordId = '';
     $scope.query = '';
 
-    if ($rootScope.currentUser !== null) {
+    if ($rootScope.currentUser !== '') {
       Authentication.signedIn(); //Use the Meetings service
     }
 

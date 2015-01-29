@@ -1,8 +1,8 @@
 myApp.controller('MeetingsController',
   function($scope, $rootScope,$firebase,
-    Authentication, Meetings, FIREBASE_URL) {
+    Meetings, FIREBASE_URL) {
 
-    if ($rootScope.currentUser !== null) {
+    if ($rootScope.currentUser !== '') {
 
       var ref = new Firebase(FIREBASE_URL + '/users/' +
         $rootScope.currentUser.$id + '/meetings');
@@ -27,5 +27,5 @@ myApp.controller('MeetingsController',
       $scope.deleteMeeting = function(key) {
         meetingsInfo.$remove(key);
       }; //deletemeeting
-    } // user exists
+    }
   }); //MeetingsController
