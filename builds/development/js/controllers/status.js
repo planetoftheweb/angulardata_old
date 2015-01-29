@@ -1,5 +1,5 @@
 myApp.controller('StatusController', function(
-  $scope, $rootScope, Authentication) {
+  $scope, Authentication) {
 
   $scope.logout = function() {
     Authentication.logout();

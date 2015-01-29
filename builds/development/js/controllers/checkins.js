@@ -3,7 +3,6 @@ myApp.controller('CheckInsController', function(
   $location, Authentication, FIREBASE_URL) {
 
     $scope.whichmeeting = $routeParams.mId;
-    $rootScope.whichmeeting = $routeParams.mId;
     $scope.whichuser = $routeParams.uId;
     $scope.order = "firstname";
     $scope.direction = "";
